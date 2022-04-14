@@ -1,8 +1,10 @@
-name: Publish npm api bindings
+name: Test take version
+
 on:
   push:
-    branches: [ 'main' ]
-    tags: [ 'v*' ]
+    branches:
+    - main
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -21,12 +23,7 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
 
     - run: npm install
-    - run: npm run compile
 
     - run: |
-        npm version --no-git-tag-version from-git
-        echo "NPM_PUBLISH_TAG=latest" >> $GITHUB_ENV
-
-    - run: npm publish --tag "${{ env.NPM_PUBLISH_TAG }}"
-
-
+        name = cat package.json | echo "`jq .name`"
+        version = cat package.json | echo "`jq .version`"
