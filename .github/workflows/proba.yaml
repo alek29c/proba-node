@@ -22,8 +22,18 @@ jobs:
         node-version: '16.x'
         registry-url: 'https://npm.pkg.github.com'
 
-    - run: npm install
-
     - run: |
         name = cat package.json | echo "`jq .name`"
         version = cat package.json | echo "`jq .version`"
+        
+    - name: Send email
+      uses: dawidd6/action-send-mail@v3.6.0
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.GMAIL_USERNAME}}
+          password: ${{secrets.GMAIL_PASSWORD}}
+          subject: Message from github actions.
+          to: aleksandra.cingovska
+          from: alek
+          secure: true
