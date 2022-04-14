@@ -25,8 +25,8 @@ jobs:
     - run:
         sudo apt-get install jq
     - run: |
-        name = $(cat package.json)
-        version = $(cat package.json | echo `jq .version`)
+        cat package.json | echo `jq .name` >  $GITHUB_ENV_NAME
+        cat package.json | echo `jq .version` > $GITHUB_ENV_VERSION
         
     - name: Send email
       uses: dawidd6/action-send-mail@v3.6.0
