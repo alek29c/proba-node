@@ -22,6 +22,8 @@ jobs:
         node-version: '16.x'
         registry-url: 'https://npm.pkg.github.com'
 
+    - run:
+        sudo apt-get install jq
     - run: |
         name = cat package.json | echo "`jq .name`"
         version = cat package.json | echo "`jq .version`"
