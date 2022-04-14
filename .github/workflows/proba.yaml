@@ -21,11 +21,9 @@ jobs:
       with:
         node-version: '16.x'
         registry-url: 'https://npm.pkg.github.com'
-    #- run:
-    #    sudo apt-get install jq
+        
     - run: |
         echo "{PKG_NAME}={$(cat package.json | echo `jq .name`)}" >> $GITHUB_ENV
-        echo $(cat package.json | echo `jq .name`)
         echo "{PKG_VERSION}={$(cat package.json | echo `jq .version`)}" >> $GITHUB_ENV
         
     - name: Send email
