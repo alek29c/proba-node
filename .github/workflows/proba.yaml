@@ -25,7 +25,7 @@ jobs:
     - run:
         sudo apt-get install jq
     - run: |
-        cat package.json | echo `jq .name` >>  $GITHUB_ENV_NAME
+        cat package.json
         cat package.json | echo `jq .version` >> $GITHUB_ENV_VERSION
         
     - name: Send email
